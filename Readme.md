@@ -1,3 +1,10 @@
+[![Docker Pulls](https://img.shields.io/docker/pulls/emqx/emqx?label=Docker%20Pulls)](https://hub.docker.com/r/emqx/emqx)
+[![Slack](https://img.shields.io/badge/Slack-EMQ-39AE85?logo=slack)](https://slack-invite.emqx.io/)
+[![Discord](https://img.shields.io/discord/931086341838622751?label=Discord&logo=discord)](https://discord.gg/xYGf3fQnES)
+[![Twitter](https://img.shields.io/badge/Follow-EMQ-1DA1F2?logo=twitter)](https://twitter.com/EMQTech)
+[![YouTube](https://img.shields.io/badge/Subscribe-EMQ-FF0000?logo=youtube)](https://www.youtube.com/channel/UC5FjR77ErAxvZENEWzQaO5Q)
+[![Substack](https://img.shields.io/badge/EMQ-ED7335?logo=substack&label=Substack)](https://emqx.substack.com/)
+
 
 MQTT is a lightweight messaging protocol that is based on the [publish/subscribe model](https://www.emqx.com/en/blog/mqtt-5-introduction-to-publish-subscribe-model). It shows distinct advantages for applications in low bandwidth and unstable network environments, e.g., IoT applications. Over the years, it has become the preferred messaging protocol for IoT scenarios like smart factories, connected cars, smart home devices, wearable devices, etc. 
 
