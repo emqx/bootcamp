@@ -16,7 +16,7 @@ Benefiting from the reliability and small resource footprint, Node.js + serverle
 
 If you have not tried serverless deployment yet, please follow [the guide in this blog](https://www.emqx.com/en/blog/a-comprehensive-guide-to-serverless-mqtt-service) to create one for free. Once you have completed the registration process with the online guide, you will get a running instance with the following similar information from the “Overview” in your deployment. We will use the connection information and CA certificate later.
 
-![Free Serverless MQTT broker](https://assets.emqx.com/images/b7f54f0922422779d30df5ede63e66fb.png?imageMogr2/thumbnail/1520x)
+![Free Serverless MQTT broker](https://assets.emqx.com/images/b7f54f0922422779d30df5ede63e66fb.png)
 
 ## Connection Code Demo
 
@@ -64,7 +64,7 @@ EMQX Serverless relies on a multi-tenant architecture that enables multiple user
 
 Next, we establish the connection using the URL constructed by splicing the host and port. Additionally, we need to configure the username and password, which must be set from Authentication & ACL - Authentication in advance.
 
-![Authentication & ACL](https://assets.emqx.com/images/356ec09d07fe9e52960b1c758d0e530e.png?imageMogr2/thumbnail/1520x)
+![Authentication & ACL](https://assets.emqx.com/images/356ec09d07fe9e52960b1c758d0e530e.png)
 
 We call the built-in connect function of the MQTT module to achieve the connection. Once the connection is established, it returns a Client instance.
 
@@ -186,15 +186,15 @@ npm start
 
 Once the project is running, we can see the output information of the console as follows:
 
-![npm start console](https://assets.emqx.com/images/16452e69dcc76d4c9f6f4cb983d937d8.png?imageMogr2/thumbnail/1520x)
+![npm start console](https://assets.emqx.com/images/16452e69dcc76d4c9f6f4cb983d937d8.png)
 
 The client appears to have successfully connected to the MQTT broker, subscribed to the topic, and received and published messages. We will use [MQTT Client Tool - MQTTX](https://mqttx.app/) as another client for the message publishing and receiving the test.
 
-![MQTT Client Tool - MQTTX](https://assets.emqx.com/images/aab9c68f2259525ea6d6f5d71b0c5dbd.png?imageMogr2/thumbnail/1520x)
+![MQTT Client Tool - MQTTX](https://assets.emqx.com/images/aab9c68f2259525ea6d6f5d71b0c5dbd.png)
 
 We can see that the message sent by MQTTX is printed in the console.
 
-![Receive messeges in the console](https://assets.emqx.com/images/37a333952c92044a62dc4145b4c4c337.png?imageMogr2/thumbnail/1520x)
+![Receive messeges in the console](https://assets.emqx.com/images/37a333952c92044a62dc4145b4c4c337.png)
 
 ## Summary and complete code example
 
