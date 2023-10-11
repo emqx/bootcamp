@@ -8,7 +8,7 @@ In this blog series, we'll guide you through using various client libraries to s
 
 ## Introduction
 
-Benefiting from the reliability and small resource footprint, Node.js + serverless MQTT can be used for real-time applications, such as lightweight chat applications. This blog will provide a step-by-step guide on how to connect a serverless MQTT broker using the [MQTT.js library](https://github.com/mqttjs/MQTT.js). You can download the project from the Github repo [MQTT Client Examples](https://github.com/emqx/MQTT-Client-Examples/tree/master/mqtt-client-Node.js).
+Benefiting from the reliability and small resource footprint, Node.js + serverless MQTT can be used for real-time applications, such as lightweight chat applications. This blog will provide a step-by-step guide on how to connect a serverless MQTT broker using the [MQTT.js library](https://github.com/mqttjs/MQTT.js).
 
 ## Free Serverless MQTT broker
 
@@ -186,7 +186,7 @@ npm start
 
 Once the project is running, we can see the output information of the console as follows:
 
-![npm start console](https://assets.emqx.com/images/16452e69dcc76d4c9f6f4cb983d937d8.png)
+![start-console](https://assets.emqx.com/images/16452e69dcc76d4c9f6f4cb983d937d8.png)
 
 The client appears to have successfully connected to the MQTT broker, subscribed to the topic, and received and published messages. We will use [MQTT Client Tool - MQTTX](https://mqttx.app/) as another client for the message publishing and receiving the test.
 
@@ -196,10 +196,10 @@ We can see that the message sent by MQTTX is printed in the console.
 
 ![Receive messeges in the console](https://assets.emqx.com/images/37a333952c92044a62dc4145b4c4c337.png)
 
-## Summary and complete code example
+## Summary
 
-This code demo explains how to connect to the Serverless deployment via the MQTT.js client library. If you've followed the process, you now have a Node.js application that can publish and subscribe. For more ways to connect to MQTT brokers in Node.js, please refer to the tutorial blog [How to use MQTT in Node.js](https://www.emqx.com/en/blog/how-to-use-mqtt-in-nodejs).
+This code demo explains how to connect to the Serverless deployment via the MQTT.js client library. If you've followed the process, you now have a Node.js application that can publish and subscribe. 
 
-## Join the EMQX Community
+## Join the EMQ Community
 
 To dive deeper into this topic, explore our[ GitHub repository](https://github.com/emqx/emqx) for the source code, join our [Discord](https://discord.com/invite/xYGf3fQnES) for discussions, and watch our [YouTube tutorials](https://www.youtube.com/@emqx) for hands-on learning. We value your feedback and contributions, so feel free to get involved and be a part of our thriving community. Stay connected and keep learning!
