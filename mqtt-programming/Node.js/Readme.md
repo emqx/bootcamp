@@ -186,6 +186,7 @@ npm start
 
 Once the project is running, we can see the output information of the console as follows:
 
+![running](https://assets.emqx.com/images/16452e69dcc76d4c9f6f4cb983d937d8.png)
 
 The client appears to have successfully connected to the MQTT broker, subscribed to the topic, and received and published messages. We will use [MQTT Client Tool - MQTTX](https://mqttx.app/) as another client for the message publishing and receiving the test.
 
