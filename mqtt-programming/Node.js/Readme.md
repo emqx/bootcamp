@@ -184,7 +184,7 @@ Then we can simply run the project using the command `npm start`.
 npm start
 ```
 
-Once the project is running, we can see the output information of the console as follows:
+Once the project is running, we can see the output information of the console as follows.
 
 ![running](https://assets.emqx.com/images/16452e69dcc76d4c9f6f4cb983d937d8.png)
 
