@@ -6,13 +6,13 @@ MQTT can be used in Unity for a variety of purposes, including AR (Augmented Rea
 
 This blog provides a simple [Unity3d](http://unity3d.com/) project for using [M2MQTT](https://github.com/eclipse/paho.mqtt.m2mqtt) with Unity. The project includes an example scene with a user interface for managing the connection to the broker and testing messaging.
 
-# Prerequisites
+## Prerequisites
 
-## Install Unity
+### Install Unity
 
 Download the installers for all major platforms from the Unity website: https://unity.com/download.
 
-## Prepare an MQTT Broker
+### Prepare an MQTT Broker
 
 Before proceeding, please ensure you have an [MQTT broker](https://www.emqx.com/en/blog/the-ultimate-guide-to-mqtt-broker-comparison) to communicate and test with.
 
@@ -28,19 +28,7 @@ Secure WebSocket Port: 8084
 
 The free public MQTT broker is exclusively available for those who wish to learn and test the MQTT protocol. It is important to avoid using it in production environments as it may pose security risks and downtime concerns.
 
-
-
-![Open Manufacturing Hub](https://assets.emqx.com/images/b4cff1e553053873a87c4fa8713b99bc.png)
-
-A Practical Guide to MQTT Broker Selection
-
-Download this practical guide and learn what to consider when choosing an MQTT broker.
-
-[Get the eBook →](https://www.emqx.com/en/resources/a-practical-guide-to-mqtt-broker-selection?utm_campaign=embedded-a-practical-guide-to-mqtt-broker-selection&from=blog-using-mqtt-in-unity-with-m2mqttunity-library)
-
-
-
-## M2MQTT for Unity
+### M2MQTT for Unity
 
 [M2MQTT library](https://github.com/CE-SDV-Unity/M2MqttUnity) is a simple [Unity3d](http://unity3d.com/) project for using [M2MQTT](https://github.com/eclipse/paho.mqtt.m2mqtt) with Unity. It includes an example scene with a UI for controlling the connection to the broker and for testing messaging. In this blog post, we will use the example scene to illustrate how to use MQTT to create an application that communicates with an MQTT broker.
 
@@ -50,7 +38,7 @@ To begin, download the repository from GitHub.
 Git clone https://github.com/CE-SDV-Unity/M2MqttUnity.git
 ```
 
-# **Import the Example Scenes**
+## Import the Example Scenes
 
 Next, create a new Unity project in UnityHub.
 
@@ -62,7 +50,7 @@ Then, copy the `M2Mqtt` and `M2MqttUnity` folders from the downloaded M2MQTT rep
 
 The library provides a test scene called `M2MqttUnity_Test`, located in the `M2MqttUnity/Examples/Scenes` folder. By inspecting the scene, we can see that the only script used to setup the MQTT Client is `M2MqttUnityTest.cs`, which is attached to the M2MQTT GameObject in the scene. However, this script is linked with other classes of the main folder `M2Mqtt`.
 
-# Connect and Subscribe
+## Connect and Subscribe
 
 Press `Play` to run the application. In the `Game` tab, you will see a default broker which is already offline in the Broker Address input box. You should replace it with the public MQTT broker (`broker.emqx.io`) we have prepared beforehand.
 
@@ -137,7 +125,7 @@ public void SetBrokerAddress(string brokerAddress)
         }
 ```
 
-# Publish MQTT Messages
+## Publish MQTT Messages
 
 We will use [**MQTT Client Tool - MQTTX**](https://mqttx.app/) as another client to test the message publishing and receiving.
 
@@ -160,7 +148,7 @@ public void TestPublish()
         }
 ```
 
-# Receive Messages
+## Receive Messages
 
 ![Receive Messages](https://assets.emqx.com/images/d186935dd01c49f768d42e703a8c81a3.png?imageMogr2/thumbnail/1520x)
 
@@ -215,10 +203,10 @@ protected override void DecodeMessage(string topic, byte[] message)
         }
 ```
 
-# Summary
+## Summary
 
 This blog post provides a guide to creating an application that communicates with an MQTT broker using Unity. By following this guide, you will learn how to establish a connection, subscribe to topics, publish messages, and receive real-time messages using the [M2MQTT library](https://github.com/CE-SDV-Unity/M2MqttUnity).
 
-# Join the EMQ Community
+## Join the EMQ Community
 
 To dive deeper into MQTT, explore our [GitHub repository](https://github.com/emqx/emqx) for the source code, join our [Discord](https://discord.com/invite/xYGf3fQnES) for discussions, and watch our [YouTube tutorials](https://www.youtube.com/@emqx) for hands-on learning. We value your feedback and contributions, so feel free to get involved and be a part of our thriving community. Stay connected and keep learning!
