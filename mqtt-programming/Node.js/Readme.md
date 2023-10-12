@@ -124,52 +124,6 @@ client.on('connect', () => {
 })
 ```
 
-## Complete code
-
-The code for connecting to the server, subscribing to topics, and publishing and receiving messages is below. For a complete demonstration of all functions, see the project's [git repository](https://github.com/emqx/MQTT-Client-Examples/blob/master/mqtt-client-Node.js).
-
-```javascript
-const mqtt = require('mqtt')
-
-const fs = require('fs')
-const protocol = 'mqtts'
-// Set the host and port based on the connection information.
-const host = 'qbc11278.ala.us-east-1.emqxsl.com'
-const port = '8883'
-const clientId = `mqtt_${Math.random().toString(16).slice(3)}`
-const connectUrl = `${protocol}://${host}:${port}`
-
-const client = mqtt.connect(connectUrl, {
-  clientId,
-  clean: true,
-  connectTimeout: 4000,
-  username: 'emqxtest',
-  password: '123456',
-  reconnectPeriod: 1000,
-  // If the server is using a self-signed certificate, you need to pass the CA.
-  ca: fs.readFileSync('./broker.emqx.io-ca.crt'),
-})
-
-const topic = '/nodejs/mqtt'
-
-client.on('connect', () => {
-  console.log('Connected')
-
-  client.subscribe([topic], () => {
-    console.log(`Subscribe to topic '${topic}'`)
-    client.publish(topic, 'nodejs mqtt test', { qos: 0, retain: false }, (error) => {
-    if (error) {
-      console.error(error)
-    }
-  })
-})
-})
-
-client.on('message', (topic, payload) => {
-  console.log('Received Message:', topic, payload.toString())
-})
-```
-
 ## Test
 
 We need to add a line of startup script to the "scripts" field in the package.json file.
