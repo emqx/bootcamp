@@ -139,7 +139,7 @@ MQTT 桥接可以将一个 MQTT 服务器中的消息桥接至另一个服务器
 在本文的测试中，我们用到了以下软件或工具：
 
 1. [EMQX](https://www.emqx.io/)，一款开源的大规模分布式 MQTT 消息服务器，专为物联网和实时通信应用而设计。
-2. [XMeter Cloud](https://www.emqx.com/en/products/xmeter)，全托管的 MQTT 负载测试云服务，基于 Apache 开源项目 JMeter 构建，可以快速运行各种 MQTT 负载和场景测试。
+2. [XMeter Cloud](https://www.emqx.com/zh/products/xmeter)，全托管的 MQTT 负载测试云服务，基于 Apache 开源项目 JMeter 构建，可以快速运行各种 MQTT 负载和场景测试。
 3. [collectd](https://github.com/collectd/collectd)，一个运行在系统上的守护进程，它可以收集CPU、内存、磁盘使用情况、网络数据等信息，并将这些数据发送到指定的数据存储中。
 4. [InfluxDB](https://www.influxdata.com/)，一个用于存储和分析时间序列数据的开源时序数据库。
 5. [Grafana](https://grafana.com/grafana/)，一个开源的数据可视化和监控工具，它可以将来自各种数据源的数据转换成美观的图表、图形和警告。

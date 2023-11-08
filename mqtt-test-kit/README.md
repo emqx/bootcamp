@@ -69,7 +69,7 @@ The results are shown below:
 
 ![img](./assets/05-symmetric-payload-test-result-02.png)
 
-As the Payload increases, the CPU usage rate gradually rises, and the end-to-end delay of the messages also shows a relatively smooth increase. However, when the Payload size reaches 8KB, we can still obtain an average delay of less than 10 milliseconds and a P99 delay of less than 20 milliseconds.
+As the Payload increases, the CPU usage rate gradually rises, and the end-to-end latency of the messages also shows a relatively smooth increase. However, when the Payload size reaches 8KB, we can still obtain an average latency of less than 10 milliseconds and a P99 latency of less than 20 milliseconds.
 
 | **Payload Size, KB** | **Recommended Workload, TPS (In + Out)** | **Average CPU Usage, % (1 - Idle)** | **Average Memory Usage, %** | **Average Letancy, ms** | **P99 Letancy, ms** |
 | -------------------- | ---------------------------------------- | ----------------------------------- | --------------------------- | ----------------------- | ------------------- |
@@ -98,7 +98,7 @@ Keeping the QoS level of the message at 1 and the Payload size at 128 bytes, the
 
 ![img](./assets/08-scene-test-result-01.png)
 
-If we only consider message delay, the performance of the three scenarios is actually very close. And under the same load, the fan-out scenario always consumes less CPU. So if we take 75% CPU usage as the boundary, we can see quite intuitively that compared to the other two scenarios, fan-out can achieve a higher throughput.
+If we only consider message latency, the performance of the three scenarios is actually very close. And under the same load, the fan-out scenario always consumes less CPU. So if we take 75% CPU usage as the boundary, we can see quite intuitively that compared to the other two scenarios, fan-out can achieve a higher throughput.
 
 ![img](./assets/09-scene-test-result-02.png)
 
@@ -124,7 +124,7 @@ Keeping the QoS level of the message as 1 and the Payload size as 128 bytes, the
 
 ![img](./assets/13-bridge-test-result-02.png)
 
-Bridging introduces an additional relay in the process of message delivery, so the end-to-end delay of the message will increase. In addition, bridging also brings additional CPU consumption. Our test results have confirmed these two points. Taking the load when the average CPU usage is around 75%, which is about 25K TPS, as the recommended load for the bridging scenario under the hardware specifications of this test, the test results of the test point with the smallest difference in CPU usage are as follows:
+Bridging introduces an additional relay in the process of message delivery, so the end-to-end latency of the message will increase. In addition, bridging also brings additional CPU consumption. Our test results have confirmed these two points. Taking the load when the average CPU usage is around 75%, which is about 25K TPS, as the recommended load for the bridging scenario under the hardware specifications of this test, the test results of the test point with the smallest difference in CPU usage are as follows:
 
 | **Recommended Workload, TPS (In + Out)** | **Average CPU Usage, % (1 - Idle)** | **Average Memory Usage, %** | **Average Letancy, ms** | **P99 Letancy, ms** |
 | ---------------------------------------- | ----------------------------------- | --------------------------- | ----------------------- | ------------------- |
@@ -179,7 +179,7 @@ Install collectd on Server 1:
 yum install collectd -y
 ```
 
-We need to use the CPU, Load, Interface, Memory plugins, which are used to collect the system metrics of CPU usage, CPU load, network traffic, and memory usage, respectively. These plugins are enabled by default, and we can find the following configuration in the /etc/collectd.conf:
+We need to use the CPU, Load, Interface, Memory plugins, which are used to collect the system metrics of CPU usage, CPU load, network traffic, and memory usage, respectively. These plugins are enabled by default, and we can find the following configuration in the `/etc/collectd.conf`:
 
 ```
 LoadPlugin cpu
@@ -201,7 +201,7 @@ The CPU plugin for collectd reports CPU usage per core by default and uses CPU J
 </Plugin>
 ```
 
-Next, we need to configure collectd's Network plugin to allow collectd to send the collected performance metrics to InfluxDB on another server. We need to add the following configuration to /etc/collectd.conf to enable the Network plugin and send the performance metrics to the specified host and port:
+Next, we need to configure collectd's Network plugin to allow collectd to send the collected performance metrics to InfluxDB on another server. We need to add the following configuration to `/etc/collectd.conf` to enable the Network plugin and send the performance metrics to the specified host and port:
 
 ```
 LoadPlugin network
@@ -227,7 +227,7 @@ sudo yum localinstall influxdb-1.8.10.x86_64.rpm -y
 
 Please don't install InfluxDB 2.7 or later versions. These versions no longer directly support backup write protocols such as collected and Prometheus. We must use Telegraf to convert these protocols into Line Protocol before writing them into InfluxDB. So for simplicity, we directly install InfluxDB 1.8 which supports the collectd write protocol.
 
-Next, we need to modify InfluxDB'configuration so that it can receive performance metrics sent by collectd and store them in the database. Open the InfluxDB configuration file /etc/influxdb/influxdb.conf, and change the configuration items in the collectd section to the following content.
+Next, we need to modify InfluxDB'configuration so that it can receive performance metrics sent by collectd and store them in the database. Open the InfluxDB configuration file `/etc/influxdb/influxdb.conf`, and change the configuration items in the `collectd` section to the following content.
 
 ```
 [[collectd]]
@@ -245,11 +245,11 @@ Next, we need to modify InfluxDB'configuration so that it can receive performanc
 
 The above configuration means that InfluxDB will listen to the collectd data on port 25826 and write it into a database named collectd, which is automatically created by InfluxDB.
 
-typesdb is required, it points to a types.db file that defines the collectd data source specification, which InfluxDB needs to understand the collectd data. You can get this file by installing collectd on your machine. /usr/share/collectd/types.db is the default path to the types.db file when you install collectd by yum, or you can get types.db from [here](./types.db).
+`typesdb` is required, it points to a `types.db` file that defines the collectd data source specification, which InfluxDB needs to understand the collectd data. You can get this file by installing collectd on your machine. `/usr/share/collectd/types.db` is the default path to the `types.db` file when you install collectd by yum, or you can get `types.db` from [here](./types.db).
 
-Setting security-level to none means that collectd data will not be signed and encrypted, which is consistent with our configuration in collectd.
+Setting `security-level` to `none` means that collectd data will not be signed and encrypted, which is consistent with our configuration in collectd.
 
-Setting parse-multivalue-plugin to split means that InfluxDB will store data with multiple values as multiple data points.
+Setting `parse-multivalue-plugin` to `split` means that InfluxDB will store data with multiple values as multiple data points.
 
 Next, start InfluxDB:
 
@@ -279,7 +279,7 @@ time                host     type    type_instance value
 1692954741571949536 ecs-afc3 percent idle          99.90003748594276
 ```
 
-### 4.  Install and configure Grafana
+### 4. Install and configure Grafana
 
 Install Grafana in Server 2:
 
@@ -295,9 +295,9 @@ systemctl start grafana-server
 
 Next, we need to import a prepared Dashboard into Grafana. This Dashboard will provide four monitoring panels for CPU usage, CPU load, memory usage, and network traffic. Click [here](./Grafana-Dashboard.json) to download the Dashboard template file.
 
-Before importing the Dashboard, we also need to make some modifications to Grafana-Dashboard.json. This is because we have added a judgment on the host field in each Query of the Grafana Dashboard in order to distinguish when there are multiple host data sources.
+Before importing the Dashboard, we also need to make some modifications to `Grafana-Dashboard.json`. This is because we have added a judgment on the host field in each Query of the Grafana Dashboard in order to distinguish when there are multiple host data sources.
 
-Search for host::tag in Grafana-Dashboard.json, and we will find the following content:
+Search for `host::tag` in `Grafana-Dashboard.json`, and we will find the following content:
 
 ```
 ...
@@ -310,15 +310,15 @@ Search for host::tag in Grafana-Dashboard.json, and we will find the following c
 ...
 ```
 
-Just globally replace the host name ecs-afc3 with our own host name. We can run the following command to view the hostname:
+Just globally replace the host name `ecs-afc3` with our own host name. We can run the following command to view the hostname:
 
 ```
 cat /proc/sys/kernel/hostname
 ```
 
-Then, open a browser and type <http://<hostname>>:3000 in the address bar to access Grafana, replacing <hostname> with the actual server address.
+Then, open a browser and type `<http://<hostname>>:3000` in the address bar to access Grafana, replacing `<hostname>` with the actual server address.
 
-The default username and password for Grafana is admin. Grafana will ask us to change the default password when we log in for the first time. After logging in, we will first add InfluxDB as the data source, click Add your first data source on the home page:
+The default username and password for Grafana is `admin`. Grafana will ask us to change the default password when we log in for the first time. After logging in, we will first add InfluxDB as the data source, click `Add your first data source` on the home page:
 
 ![img](./assets/15-add-your-first-data-source.png)
 
@@ -328,15 +328,15 @@ Find the InfluxDB data source, click to add this data source, and go to the conf
 
 Here we only need to pay attention to three configuration items:
 
-1. URL, InfluxDB's HTTP service listens on port 8086 by default, and InfluxDB and Grafana are on the same server, so we'll configure it to http://localhost:8086[.](http://localhost:8086.)
-2. Database, the database from which Grafana will read collectd data, so we configure it as collected.
-3. HTTP Method specifies the HTTP method that Grafana will use to query InfluxDB for data, here we configure it as GET.
+1. URL, InfluxDB's HTTP service listens on port 8086 by default, and InfluxDB and Grafana are on the same server, so we'll configure it to `http://localhost:8086`.
+2. Database, the database from which Grafana will read collectd data, so we configure it as `collected`.
+3. HTTP Method specifies the HTTP method that Grafana will use to query InfluxDB for data, here we configure it as `GET`.
 
-Click the Save & test button when you're done, and if the configuration is correct, you'll see a prompt datasource is working. 7 measurements found:
+Click the `Save & test` button when you're done, and if the configuration is correct, you'll see a prompt `datasource is working. 7 measurements found`:
 
 ![img](./assets/17-save-and-test-influxdb.png)
 
-Click the plus sign in the upper right corner and select Import dashboard:
+Click the plus sign in the upper right corner and select `Import dashboard`:
 
 ![img](./assets/18-click-import-dashboard.png)
 
@@ -344,13 +344,13 @@ Import the modified `Grafana-Dashboard.json` file and select the InfluxDB data s
 
 ![img](./assets/19-import-dashboard.png)
 
-Click Import button to complete the import, we will see the following four monitoring charts, which show the current server CPU usage, memory usage, network send/receive traffic, and CPU load changes respectively:
+Click `Import` button to complete the import, we will see the following four monitoring charts, which show the current server CPU usage, memory usage, network send/receive traffic, and CPU load changes respectively:
 
 ![img](./assets/20-grafana-dashboard-example.png)
 
 ### 5. System Tuning
 
-Depending on the actual scale of the test, we may also need to adjust Linux kernel parameters and EMQX parameters. For example, when the number of our MQTT client connections exceeds 65535, we usually need to adjust parameters such as fs.file-max to increase the maximum number of file descriptors that EMQX can open. When the message throughput is large, we may need to adjust the size settings of the send and receive buffers to get better performance. You can refer to the [EMQX system tuning documentation](https://www.emqx.io/docs/en/latest/performance/tune.html).
+Depending on the actual scale of the test, we may also need to adjust Linux kernel parameters and EMQX parameters. For example, when the number of our MQTT client connections exceeds 65535, we usually need to adjust parameters such as `fs.file-max` to increase the maximum number of file descriptors that EMQX can open. When the message throughput is large, we may need to adjust the size settings of the send and receive buffers to get better performance. You can refer to the [EMQX system tuning documentation](https://www.emqx.io/docs/en/latest/performance/tune.html).
 
 However, all the test cases in this article do not require any additional tuning of Linux kernel parameters, neither for the number of client connections nor for the message throughput. So all the tests in the following article are done with the following default parameters:
 
@@ -372,11 +372,11 @@ net.ipv4.tcp_max_tw_buckets = 5000
 
 After registering and logging in to [XMeter Cloud](https://www.emqx.com/en/products/xmeter) and going to the home page, we first need to switch to the **Professional Edition**. Only in the Professional Edition can we create customized test scenarios and peering connections between EMQX and XMeter Cloud. XMeter Cloud only supports peering with HUAWEI Cloud Platform now, we can contact the technical team of XMeter Cloud to help us do this. We will rollout XMeter Cloud to more public cloud providers in the future.
 
-After the peering connection is created, we can click Create Scenario to upload our JMeter script and start testing.
+After the peering connection is created, we can click `Create Scenario` to upload our JMeter script and start testing.
 
-There are four JMeter scripts we'll be using throughout the test: Fan-In.jmx, Fan-Out.jmx, Symmetric.jmx, and Symmetric-Bridge.jmx, which correspond to the Fan-In, Fan-Out, Symmetric, and Bridge scenarios, respectively. You can download these scripts [here](./scripts).
+There are four JMeter scripts we'll be using throughout the test: `Fan-In.jmx`, `Fan-Out.jmx`, `Symmetric.jmx`, and `Symmetric-Bridge.jmx`, which correspond to the Fan-In, Fan-Out, Symmetric, and Bridge scenarios, respectively. You can download these scripts [here](./scripts).
 
-Each script provides custom variables that allow us to modify parameters such as QoS level, Payload size and message publishing rate. So when we test the performance curve of the MQTT Broker under different QoS, we only need one script, Symmetric.jmx.
+Each script provides custom variables that allow us to modify parameters such as QoS level, Payload size and message publishing rate. So when we test the performance curve of the MQTT Broker under different QoS, we only need one script, `Symmetric.jmx`.
 
 Before submitting the test, XMeter Cloud will ask us to configure the following parameters:
 
@@ -384,11 +384,11 @@ Before submitting the test, XMeter Cloud will ask us to configure the following 
 
 - **Name**: By default, XMeter Cloud will concatenate the test scenario name with the current time as the test name. You can change it to any name you prefer, as long as it does not confuse you among multiple tests.
 - **Duration**: Set the duration of this test, here we set the duration to 5 minutes.
-- **Total VU Number**: Set the number of virtual users per thread group, which is the number of MQTT clients, the thread groups depend on the actual content of the script. In the Symmetric.jmx script, we have added a thread group Pub for publishing messages and a thread group Sub for receiving messages. Here we set the number of virtual users for both Pub and Sub thread groups to 1000, so the total number is 2000.
+- **Total VU Number**: Set the number of virtual users per thread group, which is the number of MQTT clients, the thread groups depend on the actual content of the script. In the `Symmetric.jmx` script, we have added a thread group Pub for publishing messages and a thread group Sub for receiving messages. Here we set the number of virtual users for both Pub and Sub thread groups to 1000, so the total number is 2000.
 - **Stress Region**: Set the VPC where the test machine will be created and the load will be initiated.
 - **Ramp-Up Period**: Set how much time it needs to reach the maximum number of virtual users we set when running the test script. Here we set it to 20 seconds, that is, the test will initiate connections at a rate of 100 connections per second during the run.
-- **Loop Mode**: Keep the default setting of loop forever. That is, the duration of the test run will be completely determined by the parameter Duration.
-- **XMeter Runtime Variables**: The variables defined in our test script are listed here,  which allow us to fine-tune our test cases by modifying them, such as changing the QoS level of the message. The following are the custom variables provided by the Symmetric.jmx script:
+- **Loop Mode**: Keep the default setting of `loop forever`. That is, the duration of the test run will be completely determined by the parameter **Duration**.
+- **XMeter Runtime Variables**: The variables defined in our test script are listed here,  which allow us to fine-tune our test cases by modifying them, such as changing the QoS level of the message. The following are the custom variables provided by the `Symmetric.jmx` script:
   - **server**: The address of the MQTT server, which needs to be configured as the server's intranet address after creating the peer connection.
   - **host**: The listening port of the MQTT server.
   - **qos**: The QoS level used when the message is published. The maximum QoS for subscribers is fixed at 2, ensuring that QoS degradation does not occur.
@@ -396,7 +396,7 @@ Before submitting the test, XMeter Cloud will ask us to configure the following 
   - **target_throughput**: The target throughput, which refers to the total publishing rate of the messages. When we set the number of virtual users in the publisher thread group to 1000 and **target_throughput** to 10000, then each publisher will publish the message at 10 msgs/s.
   - **publisher_number**, etc.: In XMeter Cloud, these variables are overridden by the previous configurations, such as **Total VU Number** and **Ramp-Up Period**. So there is no need to care about them. They are only effective when we launch the test directly using JMeter.
 
-After completing the above configurations, we can click Next to submit the test. During the running of the test, we can observe the real-time changes of throughput and response time in XMeter Cloud, and observe the CPU and other system resources usage of the server where EMQX is located in Grafana:
+After completing the above configurations, we can click `Next` to submit the test. During the running of the test, we can observe the real-time changes of throughput and response time in XMeter Cloud, and observe the CPU and other system resources usage of the server where EMQX is located in Grafana:
 
 ![img](./assets/24-test-report-in-xmeter-en.png)
 
@@ -410,7 +410,7 @@ Apply for an ECS instance with the same specifications on HUAWEI Cloud, install 
 
 ![img](./assets/26-bridge-configuration.png)
 
-Alternatively, add the following configuration to the emqx.conf configuration file. Note that the server needs to be configured as the host address of another EMQX:
+Alternatively, add the following configuration to the `emqx.conf` configuration file. Note that the `server` needs to be configured as the host address of another EMQX:
 
 ```
 bridges {
@@ -448,14 +448,14 @@ bridges {
 }
 ```
 
-After we install collectd in Server 3 and also dump the data into InfluxDB, we need to create a new Dashboard in Grafana to display the metric data of Server 3. The steps are the same as before, just modify the hostname in Grafana-Dashboard.json and then import it into Grafana.
+After we install collectd in Server 3 and also dump the data into InfluxDB, we need to create a new Dashboard in Grafana to display the metric data of Server 3. The steps are the same as before, just modify the hostname in `Grafana-Dashboard.json` and then import it into Grafana.
 
 ## Differences between JMeter and XMeter Cloud in testing
 
 All the test scripts we use in this article can be run in JMeter, we only need to install two plugins in JMeter. They are:
 
-1. mqtt-xmeter-2.0.2-jar-with-dependencies.jar, this plugin provides JMeter with the ability to test the MQTT protocol. We can add samplers such as Connect Sampler, Pub Sampler and Sub Sampler to implement operations such as connecting, publishing, and subscribing in MQTT.
-2. xmeter-plugins-common-0.0.6-SNAPSHOT.jar, this plugin provides a __xmeterThroughput() function, which we'll use in the Constant Throughput Timer. Its function is to convert our configured target_throughput into the target throughput per minute and then distribute it to each test machine according to the connection ratio. This is very useful when a single test machine cannot provide the target load.
+1. `mqtt-xmeter-2.0.2-jar-with-dependencies.jar`, this plugin provides JMeter with the ability to test the MQTT protocol. We can add samplers such as Connect Sampler, Pub Sampler and Sub Sampler to implement operations such as connecting, publishing, and subscribing in MQTT.
+2. `xmeter-plugins-common-0.0.6-SNAPSHOT.jar`, this plugin provides a `__xmeterThroughput()` function, which we'll use in the Constant Throughput Timer. Its function is to convert our configured `target_throughput` into the target throughput per minute and then distribute it to each test machine according to the connection ratio. This is very useful when a single test machine cannot provide the target load.
 
    ![img](./assets/27-xmeter-function.png)
 
