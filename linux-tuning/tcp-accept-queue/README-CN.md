@@ -1,6 +1,8 @@
 # Accept 队列溢出时 Linux 内核的行为
 
-我们已经知道 Accept 队列溢出后 Linux 内核将直接丢弃新到达的 SYN 报文。借助以下命令，我们可以观察到 SYN 报文的丢弃次数增加：
+在 [*EMQX 性能调优：TCP SYN 队列与 Accept 队列*](https://www.emqx.com/zh/blog/emqx-performance-tuning-tcp-syn-queue-and-accept-queue) 这篇博客中，我们介绍了 TCP SYN 队列和 Accept 队列对 TCP 连接的影响以及如何增加 SYN 队列和 Accept 队列大小来优化性能。
+
+通过这篇博客，我们知道了 Accept 队列溢出后 Linux 内核将直接丢弃新到达的 SYN 报文。借助以下命令，我们可以观察到 SYN 报文的丢弃次数增加：
 
 ```
 watch -n 1 -d 'netstat -s | grep "LISTEN"'
@@ -15,7 +17,7 @@ watch -n 1 -d 'netstat -s | grep "LISTEN"'
 
 但在实际的验证过程中，我们发现不同的操作系统在这方面可能有着不同的实现。以上行为在 CentOS 中得到了验证，但是在 Ubuntu 中这个内核参数似乎并不会影响系统的行为。
 
-所以我们提供了 [client.py](./client.py) 和 [server.py](./server.py) 这两个示例代码，这可以帮助我们模拟 Accept 队列溢出，以便我们观察操作系统的行为。
+考虑到操作系统的不同版本之间可能也会存在行为上的差异，因此我们提供了 [client.py](./client.py) 和 [server.py](./server.py) 这两个示例代码。遵循以下操作步骤，你可以轻松地模拟 Accept 队列溢出，并观察操作系统的行为。
 
 ## 客户端与服务端代码介绍
 
