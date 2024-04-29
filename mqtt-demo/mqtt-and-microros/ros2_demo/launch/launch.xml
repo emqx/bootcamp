@@ -1,0 +1,11 @@
+<launch>
+    <arg name="params_file" default="$(dirname)/../config/params.yaml" />
+
+    <node pkg="ros2_demo" exec="converter" name="converter">
+        <param from="$(var params_file)" />
+    </node>
+
+    <node pkg="mqtt_client" exec="mqtt_client" name="mqtt_client" output="screen">
+        <param from="$(var params_file)" />
+    </node>
+</launch>

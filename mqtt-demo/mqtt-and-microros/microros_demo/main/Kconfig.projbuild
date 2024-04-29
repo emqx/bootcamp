@@ -1,0 +1,44 @@
+menu "micro-ROS example-app settings"
+
+    orsource "$IDF_PATH/examples/common_components/env_caps/$IDF_TARGET/Kconfig.env_caps"
+
+    config MICRO_ROS_APP_NODE_NAME
+        string "Node name of the micro-ROS app"
+        default "microros_demo"
+        help
+            Node name of the micro-ROS app
+
+    config MICRO_ROS_APP_STACK
+        int "Stack the micro-ROS app (Bytes)"
+        default 16000
+        help
+            Stack size in Bytes of the micro-ROS app
+
+    config MICRO_ROS_APP_TASK_PRIO
+        int "Priority of the micro-ROS app"
+        default 5
+        help
+            Priority of micro-ros task higher value means higher priority
+
+    config MICRO_ROS_APP_LED
+        bool "Enable LED"
+        default y
+        help
+            Enable LED
+
+    config MICRO_ROS_APP_LED_STRIP_GPIO
+        int "LED Strip GPIO Number"
+        range ENV_GPIO_RANGE_MIN ENV_GPIO_OUT_RANGE_MAX
+        default 38
+        depends on MICRO_ROS_APP_LED
+        help
+            GPIO number (IOxx) to control the LED
+
+    config MICRO_ROS_APP_LED_STATE_MESSAGE_INTERVAL
+        int "LED State Message Interval"
+        default 5000
+        depends on MICRO_ROS_APP_LED
+        help
+            The publishing interval of LED state messages, in milliseconds
+        
+endmenu

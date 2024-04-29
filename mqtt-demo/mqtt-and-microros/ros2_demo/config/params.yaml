@@ -1,0 +1,32 @@
+/mqtt_client:
+  ros__parameters:
+    broker:
+      host: localhost
+      port: 8883
+      tls:
+        enabled: true
+        ca_certificate: emqxsl-ca.crt
+      user: myuser
+      pass: mypass
+    bridge:
+      ros2mqtt:
+        ros_topics: 
+          - /stat/led/hsb
+        /stat/led/hsb:
+          mqtt_topic: stat/led/hsb
+          primitive: true
+      mqtt2ros:
+        mqtt_topics: 
+          - cmnd/led/hsb
+        cmnd/led/hsb:
+          ros_topic: /cmnd/led/hsb
+          primitive: true
+/converter:
+  ros__parameters:
+    led_hsb:
+      state:
+        from: /state/led/hsb
+        to: /stat/led/hsb
+      command:
+        from: /cmnd/led/hsb
+        to: /command/led/hsb
